@@ -15,7 +15,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.REPO_PAT }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
       - name: Configure Git
@@ -31,5 +31,4 @@ jobs:
         run: |
           git add -f build/time.md
           git diff --cached --quiet || git commit -m "Auto update build time [skip ci]"
-          git remote set-url origin https://x-access-token:${{ secrets.REPO_PAT }}@github.com/${{ github.repository }}.git
           git push origin HEAD:${{ github.ref }}
