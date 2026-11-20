@@ -10,6 +10,8 @@
 /.idea/assetWizardSettings.xml
 .DS_Store
 /build
+!build/time.md
+!build/photo_2026-11-20_21-21-45.jpg
 /captures
 .externalNativeBuild
 .cxx
