@@ -1,0 +1,32 @@
+name: Auto Update Time
+
+on:
+  schedule:
+    - cron: '0 */5 * * *'  # Run every 5 hours
+  workflow_dispatch:        # Allow manual trigger
+
+jobs:
+  update-time:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Update time.md
+        run: |
+          echo "Last updated: $(date -u '+%Y-%m-%d %H:%M:%S UTC')" > build/time.md
+
+      - name: Commit and push changes
+        run: |
+          git add build/time.md
+          git diff --cached --quiet || git commit -m "Auto update build time [skip ci]"
+          git push origin HEAD:${{ github.ref }}
