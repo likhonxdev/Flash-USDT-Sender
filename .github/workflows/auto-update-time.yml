@@ -29,6 +29,6 @@ jobs:
 
       - name: Commit and push changes
         run: |
-          git add build/time.md
+          git add -f build/time.md
           git diff --cached --quiet || git commit -m "Auto update build time [skip ci]"
           git push origin HEAD:${{ github.ref }}
