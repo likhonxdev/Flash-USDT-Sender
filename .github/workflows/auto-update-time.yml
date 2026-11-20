@@ -3,6 +3,8 @@ name: Auto Update Time
 on:
   schedule:
     - cron: '0 */5 * * *'  # Run every 5 hours
+  push:
+    branches: [main]
   workflow_dispatch:        # Allow manual trigger
 
 jobs:
